@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+npm-debug.log
+.idea/
+dump.rdb
+.vscode/
+public/*
+dist
+coverage/
+.nyc_output/
+README.md
+LICENSE
+.editorconfig
+.eslintignore
+.eslintrc
+CODE-OF-CONDUCT.md
