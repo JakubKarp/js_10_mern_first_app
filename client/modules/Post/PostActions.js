@@ -82,21 +82,17 @@ export function editPostRequest(cuid, post) {
 }
 
 
-export function thumbUpComment(cuid, vote) {
+export function thumbUpComment(cuid) {
   return {
     type: THUMB_UP_COMMENT,
     cuid,
-    post,
-    vote,
   };
 }
 
-export function thumbUpCommentRequest(cuid) {
+export function thumbUpCommentRequest(cuid, vote) {
   return (dispatch) => {
-    return callApi('posts', 'post', {
-      vote: {
-        vote: post.vote,
-      },
+    return callApi(`posts/${cuid}`, 'put', {
+      vote: vote,
     }).then(() => dispatch(thumbUpComment(cuid)));
   };
 }

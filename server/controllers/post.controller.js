@@ -90,14 +90,15 @@ export function editPost(req, res) {
   });
 }
 
-/* 
+ 
 // Vote Post
 export function thumbUpComment(req, res) {
-  Post.update({ cuid: req.params.cuid }, req.vote).exec((err, post) => {
+  console.log(req.body.post.vote)
+  Post.update({ cuid: req.params.cuid }, req.body.post.vote).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }
+    
     res.json({ post });
   });
 } 
-*/

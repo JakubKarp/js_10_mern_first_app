@@ -29,8 +29,7 @@ export class PostListPage extends Component {
     this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
-  handleVoteUp = (cuid) => {
-    this.props.dispatch(thumbUpComment(cuid));
+  handleVoteUp = (cuid, vote) => {
     this.props.dispatch(thumbUpCommentRequest(cuid, vote));
   }; 
 
