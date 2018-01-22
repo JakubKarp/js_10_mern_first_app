@@ -78,3 +78,26 @@ export function deletePost(req, res) {
     });
   });
 }
+
+
+// Edit Post 
+export function editPost(req, res) {
+  Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
+
+/* 
+// Vote Post
+export function thumbUpComment(req, res) {
+  Post.update({ cuid: req.params.cuid }, req.vote).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+} 
+*/

@@ -1,6 +1,7 @@
 export default {
   locale: 'fr',
   messages: {
+    editPost: 'Edit Post',
     siteTitle: 'MERN blog de démarrage',
     addPost: 'Ajouter Poster',
     switchLanguage: 'Changer de langue',

@@ -1,5 +1,5 @@
 .header {
-  background: #eee url('../../header-bk.png') center;
+  background: rgb(13, 41, 204) url('../../header-bk.png') center;
   background-size: cover;
   border-bottom: 1px solid #ccc;
 }
