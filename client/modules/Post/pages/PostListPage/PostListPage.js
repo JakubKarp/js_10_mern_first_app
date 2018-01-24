@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import cuid from 'cuid';
 
 // Import Components
 import PostList from '../../components/PostList';
@@ -25,15 +24,14 @@ export class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (cuid, name, title, content) => {
+  handleAddPost = (name, title, content) => {
     this.props.dispatch(toggleAddPost());
     this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
-  handleVoteUp = (cuid, vote) => {
-    this.props.dispatch(thumbUpCommentRequest(cuid, vote));
-  }; 
-
+  handleVoteUp = (cuid) => {
+    this.props.dispatch(thumbUpCommentRequest(cuid));
+  };
 
   render() {
     return (
