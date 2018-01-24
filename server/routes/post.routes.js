@@ -18,6 +18,6 @@ router.route('/posts/:cuid').delete(PostController.deletePost);
 router.route('/posts/:cuid').put(PostController.editPost);
 
 // Update vote
-router.route('/posts/:cuid').put(PostController.thumbUpComment);
+router.route('/posts/:cuid').post(PostController.thumbUpComment);
 
 export default router;
