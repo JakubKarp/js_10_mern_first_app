@@ -16,6 +16,7 @@ export function addPost(post) {
 }
 
 export function addPostRequest(post) {
+  console.log('addPostRequest', post)
   return (dispatch) => {
     return callApi('posts', 'post', {
       post: {
@@ -89,10 +90,12 @@ export function thumbUpComment(cuid) {
   };
 }
 
-export function thumbUpCommentRequest(cuid, vote) {
+export function thumbUpCommentRequest(cuid) {
   return (dispatch) => {
     return callApi(`posts/${cuid}`, 'put', {
-      vote: vote,
-    }).then(() => dispatch(thumbUpComment(cuid)));
+      thumbUp: true,
+    })
+    .then(() => dispatch(thumbUpComment(cuid)))
+    .catch(console.error);
   };
 }

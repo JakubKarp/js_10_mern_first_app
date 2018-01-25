@@ -13,4 +13,5 @@ LICENSE
 .editorconfig
 .eslintignore
 .eslintrc
-CODE-OF-CONDUCT.md
+CODE-OF-CONDUCT.mddata/
+data/

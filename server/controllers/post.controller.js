@@ -14,7 +14,9 @@ export function getPosts(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-    res.json({ posts });
+    res.json({
+      posts
+    });
   });
 }
 
@@ -26,7 +28,7 @@ export function getPosts(req, res) {
  */
 export function addPost(req, res) {
   if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
-    res.status(403).end();
+    return res.status(403).end();
   }
 
   const newPost = new Post(req.body.post);
@@ -35,14 +37,18 @@ export function addPost(req, res) {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
-
-  newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
+  newPost.slug = slug(newPost.title.toLowerCase(), {
+    lowercase: true
+  });
   newPost.cuid = cuid();
+  console.log('newPost.cuid', newPost.cuid)
   newPost.save((err, saved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.json({ post: saved });
+    res.json({
+      post: saved
+    });
   });
 }
 
@@ -53,11 +59,15 @@ export function addPost(req, res) {
  * @returns void
  */
 export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({
+    cuid: req.params.cuid
+  }).exec((err, post) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.json({ post });
+    res.json({
+      post
+    });
   });
 }
 
@@ -68,7 +78,9 @@ export function getPost(req, res) {
  * @returns void
  */
 export function deletePost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({
+    cuid: req.params.cuid
+  }).exec((err, post) => {
     if (err) {
       return res.status(500).send(err);
     }
@@ -82,23 +94,27 @@ export function deletePost(req, res) {
 
 // Edit Post 
 export function editPost(req, res) {
-  Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.json({ post });
-  });
+  if (req.body.thumbUp) {
+    Post.update({
+      cuid: req.params.cuid
+    }, { $inc: { vote: 1 }}).exec((err, post) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.json({
+        post
+      })
+    })
+  } else {
+    Post.update({
+      cuid: req.params.cuid
+    }, req.body.post).exec((err, post) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.json({
+        post
+      });
+    });
+  }
 }
-
- 
-// Vote Post
-export function thumbUpComment(req, res) {
-  console.log(req.body.post.vote)
-  Post.update({ cuid: req.params.cuid }, req.body.post.vote).exec((err, post) => {
-    if (err) {
-      return  res.status(500).send(err);
-    } else {    
-      return res.json({ post });
-    }  
-  });
-} 
