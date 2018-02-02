@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 
+
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
@@ -21,6 +22,8 @@ if (process.env.NODE_ENV !== 'production') {
   // KOD DO MODUŁU HOME
   require('./modules/Home/Home');
   // KONIEC KODU DO MODUŁU HOME
+  // KOD DO MODUŁU About
+  require('./modules/About/About');
 }
 
 // react-router setup with code-splitting
@@ -52,5 +55,15 @@ export default (
       }}
     />
     {/* kONIEC KODU DO MODUŁU HOME*/}
+    {/* KOD DO MODUŁU ABOUT*/}
+    <Route
+      path="/about"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/About/About').default);
+        });
+      }}
+    />
+    {/* kONIEC KODU DO MODUŁU ABOUT*/}
   </Route>
 );

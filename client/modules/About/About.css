@@ -1,0 +1,12 @@
+/* About styles */
+.aboutContainer {
+    padding: 60px;
+    text-align: center;
+    width: 100%;
+    height: 10vh
+}
+
+.h2aboutContainer {
+    color: green;
+    text-transform: uppercase;
+}
